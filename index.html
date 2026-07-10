@@ -78,6 +78,42 @@
   .hero h1 .g { background: linear-gradient(96deg,var(--glow-green),var(--glow-blue)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
   .hero p.sub { font-size: clamp(17px,2vw,21px); color: rgba(255,255,255,.85); max-width: 560px; margin-bottom: 34px; }
   .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  /* Type-on + capture (the check-in moment) */
+  .hero h1 .ch { opacity: 0; }
+  .hero h1.typed .ch { opacity: 1; transition: opacity .18s ease; }
+  .cap { position: relative; display: inline-block; padding: 0 .08em; }
+  .cap::before { content: ''; position: absolute; inset: .02em -.12em -.06em -.1em; border-radius: .28em;
+    padding: 3px; background: var(--grad);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0; transform: scale(1.18); }
+  .cap .tickbadge { position: absolute; top: -.18em; right: -.42em; width: .42em; height: .42em; border-radius: 50%;
+    background: var(--grad); display: grid; place-items: center; opacity: 0; transform: scale(.3);
+    box-shadow: 0 6px 18px rgba(0,189,129,.45); }
+  .cap .tickbadge svg { width: 58%; height: 58%; stroke: #fff; stroke-width: 3.4; fill: none; }
+  .cap.on::before { opacity: 1; transform: scale(1); transition: opacity .3s ease, transform .45s cubic-bezier(.2,1.4,.4,1); }
+  .cap.on .tickbadge { opacity: 1; transform: scale(1); transition: opacity .2s ease .18s, transform .5s cubic-bezier(.2,1.8,.4,1) .18s; }
+
+  /* Place chips — check in as each photo comes up */
+  .place-chips { display: flex; gap: 10px; flex-wrap: wrap; margin: 18px 0 34px; }
+  .place-chip { display: inline-flex; align-items: center; gap: 7px; font-family: var(--sans); font-weight: 600;
+    font-size: 14.5px; padding: 7px 16px; border-radius: 999px; color: rgba(255,255,255,.72);
+    border: 1.5px solid rgba(255,255,255,.28); position: relative; transition: color .4s, border-color .4s, background .4s; }
+  .place-chip .tick { display: grid; place-items: center; width: 16px; height: 16px; border-radius: 50%;
+    background: rgba(255,255,255,.18); transform: scale(.85); transition: background .4s, transform .4s; }
+  .place-chip .tick svg { width: 10px; height: 10px; stroke: rgba(255,255,255,.55); stroke-width: 3; fill: none; transition: stroke .4s; }
+  .place-chip.active { color: #fff; border-color: transparent; background: linear-gradient(96deg, rgba(0,189,129,.32), rgba(36,119,179,.32)); }
+  .place-chip.active .tick { background: var(--grad); transform: scale(1.08); }
+  .place-chip.active .tick svg { stroke: #fff; }
+  .place-chip.active::after { content: ''; position: absolute; inset: -2px; border-radius: 999px;
+    border: 1.5px solid rgba(70,214,180,.65); animation: chipping 1.6s ease-out; pointer-events: none; }
+  @keyframes chipping { 0% { transform: scale(1); opacity: .9; } 100% { transform: scale(1.28); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .hero h1 .ch, .hero h1.typed .ch { transition: none; }
+    .place-chip.active::after { animation: none; }
+  }
   .hero-stats { display: flex; gap: 34px; margin-top: 56px; }
   .hero-stat .n { font-family: var(--sans); font-weight: 800; font-size: 34px; }
   .hero-stat .l { font-size: 13.5px; color: rgba(255,255,255,.65); max-width: 150px; line-height: 1.35; }
@@ -314,8 +350,13 @@
   <div class="wrap">
     <div class="hero-copy">
       <div class="eyebrow light">Attendance-Based Fan Loyalty</div>
-      <h1>Identify every fan.<br><span class="g">Reward them everywhere.</span></h1>
-      <p class="sub">BlinkUp turns your team app into a sponsorship activation platform across every place fans watch — in the arena, at the bar, and at home.</p>
+      <h1 id="heroH1">Identify <span class="cap" id="heroCap">every fan.<span class="tickbadge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 13l5 5L20 7"/></svg></span></span><br><span class="g">Reward them everywhere.</span></h1>
+      <p class="sub" style="margin-bottom:0;">BlinkUp turns your team app into a sponsorship activation platform across every place fans watch:</p>
+      <div class="place-chips" aria-hidden="false">
+        <span class="place-chip" data-place="0"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l5 5L20 7"/></svg></span>in the arena</span>
+        <span class="place-chip" data-place="1"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l5 5L20 7"/></svg></span>at the bar</span>
+        <span class="place-chip" data-place="2"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l5 5L20 7"/></svg></span>at home</span>
+      </div>
       <div class="hero-cta">
         <a href="#demo" class="btn btn-primary">Book a Demo →</a>
         <a href="#how" class="btn btn-ghost">See How It Works</a>
@@ -660,16 +701,47 @@
 </footer>
 
 <script>
-  // Hero rotation: arena → bar → home. With reduced motion the CSS fade is
-  // disabled, so the swap is an instant cut rather than an animation.
+  // Type-on headline, then "capture" the fan — the check-in moment.
+  // Runs even under reduced motion (a brief one-shot content reveal);
+  // only the looping pulse effects are motion-gated in CSS.
+  (function () {
+    const h1 = document.getElementById('heroH1');
+    const capEl = document.getElementById('heroCap');
+    const chars = [];
+    function splitNode(node) {
+      if (node.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        for (const c of node.textContent) {
+          const s = document.createElement('span');
+          s.className = 'ch';
+          s.textContent = c;
+          frag.appendChild(s);
+          chars.push(s);
+        }
+        node.replaceWith(frag);
+      } else if (node.nodeType === 1 && node.tagName !== 'svg' && !node.classList.contains('tickbadge')) {
+        Array.from(node.childNodes).forEach(splitNode);
+      }
+    }
+    Array.from(h1.childNodes).forEach(splitNode);
+    h1.classList.add('typed');
+    chars.forEach((s, i) => setTimeout(() => { s.style.opacity = 1; }, 120 + i * 26));
+    setTimeout(() => capEl.classList.add('on'), 120 + chars.length * 26 + 350);
+  })();
+
+  // Hero rotation: arena → bar → home, with the matching place chip
+  // "checking in". With reduced motion the CSS fade is disabled, so the
+  // swap is an instant cut rather than an animation.
   const slides = document.querySelectorAll('.hero-art');
+  const chips = document.querySelectorAll('.place-chip');
+  function setPlace(i) {
+    slides.forEach((s, k) => s.classList.toggle('on', k === i));
+    chips.forEach((c, k) => c.classList.toggle('active', k === i));
+  }
   if (slides.length > 1) {
     let cur = 0;
-    setInterval(() => {
-      slides[cur].classList.remove('on');
-      cur = (cur + 1) % slides.length;
-      slides[cur].classList.add('on');
-    }, 6000);
+    setPlace(cur);
+    setInterval(() => { cur = (cur + 1) % slides.length; setPlace(cur); }, 6000);
   }
 
   const nav = document.getElementById('nav');
