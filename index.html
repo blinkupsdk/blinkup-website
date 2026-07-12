@@ -299,6 +299,40 @@
   .slate-mini { text-align: center; margin-top: 40px; font-family: var(--sans); font-weight: 700; font-size: clamp(16px,2vw,20px); color: var(--ink); }
   .slate-mini .grad-text { font-weight: 800; }
 
+  /* Game plan builder */
+  .planner-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 56px; align-items: start; }
+  .q-label { font-family: var(--sans); font-weight: 700; font-size: 17px; color: var(--ink); margin: 26px 0 12px; }
+  .q-label:first-child { margin-top: 0; }
+  .q-hint { font-size: 13px; color: var(--muted); margin: -8px 0 12px; }
+  .plan-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .plan-chip { display: inline-flex; align-items: center; gap: 8px; font-family: var(--sans); font-weight: 600;
+    font-size: 14.5px; padding: 9px 18px; border-radius: 999px; color: var(--text); background: #fff;
+    border: 1.5px solid rgba(0,0,0,.16); cursor: pointer; transition: color .25s, border-color .25s, background .25s, box-shadow .25s; }
+  .plan-chip:hover { border-color: var(--teal); }
+  .plan-chip .tick { display: grid; place-items: center; width: 17px; height: 17px; border-radius: 50%;
+    background: rgba(0,0,0,.08); transition: background .25s; }
+  .plan-chip .tick svg { width: 10px; height: 10px; stroke: rgba(0,0,0,.35); stroke-width: 3; fill: none; transition: stroke .25s; }
+  .plan-chip.sel { color: #fff; border-color: transparent; background: var(--grad); box-shadow: 0 8px 22px rgba(0,189,129,.28); }
+  .plan-chip.sel .tick { background: rgba(255,255,255,.25); }
+  .plan-chip.sel .tick svg { stroke: #fff; }
+  .plan-chip:focus-visible { outline: 3px solid rgba(36,119,179,.5); outline-offset: 2px; }
+  .plan-card { background: #fff; border-radius: 20px; box-shadow: 0 18px 55px rgba(20,50,80,.12); padding: 30px 32px 32px; position: relative; overflow: hidden; }
+  .plan-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px; background: var(--grad); }
+  .plan-card .plabel { font-family: var(--sans); font-weight: 700; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); margin-bottom: 4px; }
+  .plan-card h3 { color: var(--ink); font-size: 23px; margin-bottom: 4px; }
+  .plan-card .psub { font-size: 14px; color: var(--muted); margin-bottom: 10px; }
+  .plan-item { display: flex; gap: 14px; padding: 15px 0; border-bottom: 1px solid rgba(0,0,0,.07); }
+  .plan-item .ic { width: 40px; height: 40px; border-radius: 11px; }
+  .plan-item .ic svg { width: 21px; height: 21px; }
+  .plan-item h4 { font-family: var(--sans); font-size: 16px; color: var(--ink); }
+  .plan-item p { font-size: 14px; color: var(--muted); }
+  .plan-always { margin-top: 16px; background: var(--bg-2); border-radius: 14px; padding: 16px 18px; font-size: 14px; color: var(--text); }
+  .plan-always b { color: var(--ink); font-family: var(--sans); }
+  .plan-sponsor { margin-top: 12px; font-size: 14.5px; color: var(--text); background: rgba(36,119,179,.07); border-left: 3px solid var(--blue); border-radius: 0 12px 12px 0; padding: 14px 16px; }
+  .plan-cta { margin-top: 22px; width: 100%; justify-content: center; }
+  .plan-empty { padding: 30px 0 16px; color: var(--muted); font-size: 15px; }
+  @media (max-width: 940px) { .planner-grid { grid-template-columns: 1fr; gap: 34px; } }
+
   /* Beyond game day — the fan calendar */
   .cal-strip { display: grid; grid-template-columns: repeat(7,1fr); gap: 18px 10px; position: relative; margin-top: 54px; }
   .cal-strip::before { content: ''; position: absolute; top: 27px; left: 6%; right: 6%; height: 2px;
@@ -707,6 +741,43 @@
   </div>
 </section>
 
+<section class="sec" id="planner">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Build Your Game Plan</div>
+      <h2>Let's customize the best attendance-based rewards for your team.</h2>
+      <p class="lead">Two questions. Instant game plan — <span class="serif-i grad-text">built from what you pick.</span></p>
+    </div>
+    <div class="planner-grid">
+      <div class="reveal">
+        <div class="q-label">1. Where do you want fans showing up?</div>
+        <div class="q-hint">Pick all that apply — pro team, big program, or small school.</div>
+        <div class="plan-chips" id="qVenues">
+          <button type="button" class="plan-chip sel" data-v="stadium"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l5 5L20 7"/></svg></span>In the stadium</button>
+          <button type="button" class="plan-chip" data-v="bars"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l5 5L20 7"/></svg></span>At bars</button>
+          <button type="button" class="plan-chip" data-v="home"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l5 5L20 7"/></svg></span>At home</button>
+          <button type="button" class="plan-chip" data-v="events"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l5 5L20 7"/></svg></span>Tailgates &amp; events</button>
+        </div>
+        <div class="q-label">2. Are your sponsors asking for measurable results?</div>
+        <div class="plan-chips" id="qSponsor">
+          <button type="button" class="plan-chip sel" data-s="yes"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l5 5L20 7"/></svg></span>Yes, constantly</button>
+          <button type="button" class="plan-chip" data-s="notyet"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l5 5L20 7"/></svg></span>Not yet</button>
+          <button type="button" class="plan-chip" data-s="unsure"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l5 5L20 7"/></svg></span>Honestly, not sure</button>
+        </div>
+      </div>
+      <div class="plan-card reveal" aria-live="polite">
+        <div class="plabel">Your BlinkUp Game Plan</div>
+        <h3 id="planTitle">The stadium-first game plan</h3>
+        <p class="psub" id="planSub"></p>
+        <div id="planItems"></div>
+        <div class="plan-always"><b>Included in every plan:</b> season milestones &amp; attendance streaks, and every participating fan identified — first-party data in your CRM.</div>
+        <div class="plan-sponsor" id="planSponsor"></div>
+        <a class="btn btn-primary plan-cta" id="planCta" href="mailto:willbott@blinkupapp.com">Book a demo — bring this plan →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="cta" id="demo">
   <div class="wrap">
     <div class="eyebrow light reveal" style="text-align:center;">Next Steps</div>
@@ -805,6 +876,64 @@
     entries.forEach(e => { if (e.isIntersecting) { runCount(e.target); countObs.unobserve(e.target); } });
   }, { threshold: 0.5 });
   document.querySelectorAll('[data-count]').forEach(el => countObs.observe(el));
+
+  // Game plan builder — two questions in, tailored plan out.
+  (function () {
+    const VENUES = {
+      stadium: { name: 'In the Stadium', icon: '<path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/>',
+        copy: '"Fan of the Game" prize draws, attendance streaks, student-section rewards, and stat-trigger deals in the seats.' },
+      bars: { name: 'Bar Network', icon: '<path d="M5 11h12l-1 9H6z"/><path d="M8 11V7a4 4 0 018 0v4"/>',
+        copy: 'We build and onboard your watch-party bar network. "Bar of the Game" wins a sponsored round; deals fill barstools all season.' },
+      home: { name: 'At Home <span class="patent-chip">Patent-pending</span>', icon: '<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/>',
+        copy: 'Bluetooth-verified home watch parties — no location permission required. Prize drops during the broadcast; home counts toward milestones.' },
+      events: { name: 'Tailgates & Events', icon: '<path d="M12 3c2 3 5 4.5 5 8a5 5 0 01-10 0c0-3.5 3-5 5-8z"/>',
+        copy: '"Tailgate of the Game" check-ins, plus draft parties, fan fests, and community events — a 365-day sponsor calendar.' }
+    };
+    const SPONSOR = {
+      yes: 'Lead with proof: every activation reports check-ins, redemptions, and tracked sales — per-game recaps your partners can renew on.',
+      notyet: 'Get ahead of it: walk into renewals with new, ownable inventory — Fan of the Game, Bar of the Game, season milestones — before partners even ask for numbers.',
+      unsure: 'We’ll show you: on the demo we’ll walk through how teams package these activations and what a sponsor recap looks like.'
+    };
+    const TITLES = { 0: 'Pick a place to start', 1: 'The focused game plan', 2: 'The two-front game plan', 3: 'The full-coverage game plan', 4: 'The 365 game plan' };
+    const state = { venues: new Set(['stadium']), sponsor: 'yes' };
+    const items = document.getElementById('planItems');
+    const title = document.getElementById('planTitle');
+    const sub = document.getElementById('planSub');
+    const sponsorEl = document.getElementById('planSponsor');
+    const cta = document.getElementById('planCta');
+
+    function render() {
+      const picked = Object.keys(VENUES).filter(v => state.venues.has(v));
+      title.textContent = picked.length === 1
+        ? 'The ' + { stadium: 'stadium-first', bars: 'bar-network', home: 'at-home', events: 'event-driven' }[picked[0]] + ' game plan'
+        : TITLES[picked.length];
+      sub.textContent = picked.length
+        ? 'Built for a team pushing fans to show up ' + picked.map(v => ({ stadium: 'in the stadium', bars: 'at bars', home: 'at home', events: 'at tailgates & events' })[v]).join(', ') + '.'
+        : '';
+      items.innerHTML = picked.length
+        ? picked.map(v => '<div class="plan-item"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2">' + VENUES[v].icon + '</svg></div><div><h4>' + VENUES[v].name + '</h4><p>' + VENUES[v].copy + '</p></div></div>').join('')
+        : '<div class="plan-empty">Pick at least one place fans gather — we’ll build the plan from there.</div>';
+      sponsorEl.textContent = SPONSOR[state.sponsor];
+      sponsorEl.style.display = picked.length ? '' : 'none';
+      const body = 'Hi Will,%0D%0A%0D%0AWe built a game plan on your site and want to see a demo.%0D%0A%0D%0AWhere we want fans showing up: '
+        + (picked.map(v => ({ stadium: 'in the stadium', bars: 'at bars', home: 'at home', events: 'tailgates & events' })[v]).join(', ') || '(not selected)')
+        + '%0D%0ASponsors asking for measurable results: ' + { yes: 'yes, constantly', notyet: 'not yet', unsure: 'not sure' }[state.sponsor]
+        + '%0D%0A%0D%0ATeam / organization: %0D%0AName: ';
+      cta.href = 'mailto:willbott@blinkupapp.com?subject=' + encodeURIComponent('BlinkUp game plan — demo request') + '&body=' + body;
+    }
+    document.querySelectorAll('#qVenues .plan-chip').forEach(b => b.addEventListener('click', () => {
+      const v = b.dataset.v;
+      state.venues.has(v) ? state.venues.delete(v) : state.venues.add(v);
+      b.classList.toggle('sel', state.venues.has(v));
+      render();
+    }));
+    document.querySelectorAll('#qSponsor .plan-chip').forEach(b => b.addEventListener('click', () => {
+      state.sponsor = b.dataset.s;
+      document.querySelectorAll('#qSponsor .plan-chip').forEach(x => x.classList.toggle('sel', x === b));
+      render();
+    }));
+    render();
+  })();
 
   function fillRing(sel, pct) {
     const el = document.querySelector(sel); if (!el) return;
