@@ -130,9 +130,10 @@
 
   /* Problem */
   .prob-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 64px; align-items: center; }
-  .donut { width: 230px; height: 230px; margin: 0 auto; }
-  .donut-label { margin-top: 18px; text-align: center; }
-  .donut-label .p { font-family: var(--sans); font-weight: 900; font-size: 54px; line-height: 1; }
+  .donut-wrap { position: relative; width: 230px; margin: 0 auto; }
+  .donut { width: 230px; height: 230px; display: block; }
+  .donut-label { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; }
+  .donut-label .p { font-family: var(--sans); font-weight: 900; font-size: 44px; line-height: 1; }
   .donut-label .s { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--light-accent); font-weight: 700; }
   .donut-sub { font-size: 15px; color: rgba(255,255,255,.68); max-width: 250px; margin: 14px auto 0; text-align: center; }
   .donut-src { font-size: 11.5px; color: rgba(255,255,255,.4); margin-top: 8px; text-align: center; }
@@ -403,12 +404,7 @@
       </div>
       <div class="hero-cta">
         <a href="#demo" class="btn btn-primary">Book a Demo →</a>
-        <a href="#how" class="btn btn-ghost">See How It Works</a>
-      </div>
-      <div class="hero-stats">
-        <div class="hero-stat"><div class="n grad-text" data-count="100" data-suffix="%">0%</div><div class="l">of participating fans identified</div></div>
-        <div class="hero-stat"><div class="n grad-text">3</div><div class="l">places we reach them</div></div>
-        <div class="hero-stat"><div class="n grad-text">1</div><div class="l">SDK, inside your app</div></div>
+        <a href="#planner" class="btn btn-ghost">Build Your Game Plan</a>
       </div>
     </div>
   </div>
@@ -422,29 +418,32 @@
     </div>
     <div class="prob-grid">
       <div class="reveal">
-        <svg class="donut" viewBox="0 0 120 120">
-          <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="12"/>
-          <circle class="donut-fg" cx="60" cy="60" r="52" fill="none" stroke="#199AA0" stroke-width="12" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" transform="rotate(-90 60 60)"/>
-        </svg>
-        <div class="donut-label"><div class="p grad-text" data-count="24" data-suffix="%">0%</div><div class="s">Identifiable</div></div>
+        <div class="donut-wrap">
+          <svg class="donut" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="12"/>
+            <circle class="donut-fg" cx="60" cy="60" r="52" fill="none" stroke="#199AA0" stroke-width="12" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" transform="rotate(-90 60 60)"/>
+          </svg>
+          <div class="donut-label"><div class="p grad-text" data-count="24" data-suffix="%">0%</div><div class="s">Identifiable</div></div>
+        </div>
         <div class="donut-sub">Sports organizations can identify only <b>24%</b> of their total audience.</div>
         <div class="donut-src">Dizplai Anonymous Fan Index, 2026</div>
       </div>
       <div class="prob-list reveal">
-        <div class="row"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/></svg></div><div><h4>In the Arena</h4><p>Shared and resold tickets mean you rarely know who's in the seat.</p></div></div>
-        <div class="row"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 11h12l-1 9H6z"/><path d="M8 11V7a4 4 0 018 0v4"/><path d="M17 11h2a2 2 0 010 4h-2"/></svg></div><div><h4>At the Bar</h4><p>Fans pack bars every game day — invisible to the team.</p></div></div>
-        <div class="row"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></div><div><h4>At Home</h4><p>Your biggest audience, with no reason to raise their hand.</p></div></div>
+        <div class="row"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/></svg></div><div><h4>In the Arena</h4><p>Shared &amp; resold tickets — unknown fans in your seats</p></div></div>
+        <div class="row"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 11h12l-1 9H6z"/><path d="M8 11V7a4 4 0 018 0v4"/><path d="M17 11h2a2 2 0 010 4h-2"/></svg></div><div><h4>At the Bar</h4><p>Bars full of fans — invisible to the team</p></div></div>
+        <div class="row"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></div><div><h4>At Home</h4><p>Your biggest audience — no reason to raise a hand</p></div></div>
       </div>
     </div>
-    <p class="prob-foot reveal">BlinkUp gives every fan a reason to identify themselves — and turns that into <span class="serif-i" style="color:var(--light-accent)">measurable, rewardable engagement.</span></p>
+    <p class="prob-foot reveal">BlinkUp turns invisible fans into <span class="serif-i" style="color:var(--light-accent)">measurable, rewardable engagement.</span></p>
   </div>
 </section>
 
 <section class="manifesto">
   <div class="glow" aria-hidden="true"></div>
   <div class="wrap">
-    <p class="big reveal">Other loyalty programs reward <b>spending.</b><br>BlinkUp rewards <b>showing up</b> — the thing you actually want fans to do.</p>
-    <p class="kicker reveal"><span class="grad-text">Just be there — and get rewarded for it.</span></p>
+    <p class="big reveal">Other loyalty programs reward <b>spending.</b><br>BlinkUp rewards what real fans already do:</p>
+    <p class="big reveal" style="margin-top:18px;"><span class="kicker grad-text" style="font-size:inherit;">Watch at home. Go to bars. Cheer in the stadium.</span></p>
+    <p class="kicker reveal">Just be there — and get rewarded for it.</p>
   </div>
 </section>
 
@@ -459,21 +458,21 @@
         <img class="card-art" src="assets/art/card-arena.jpg" alt="A packed arena crowd on game night" loading="lazy" />
         <div class="card-body">
           <h3>In the Arena</h3>
-          <ul><li>Auto check-in live in the arena</li><li>Rewards for being in the building</li><li>Credit for staying the full game</li></ul>
+          <ul><li>Auto check-in — rewards for being in the building</li></ul>
         </div>
       </div>
       <div class="card has-art reveal">
         <img class="card-art" src="assets/art/card-bar.jpg" alt="Friends celebrating a play at a sports bar" loading="lazy" />
         <div class="card-body">
           <h3>At the Bar</h3>
-          <ul><li>Watch games at official partner bars</li><li>Bar network deals and offers</li><li>Credit for game-day watch parties</li></ul>
+          <ul><li>Official partner bars with game-day deals</li></ul>
         </div>
       </div>
       <div class="card has-art reveal">
         <img class="card-art" src="assets/art/card-home.jpg" alt="Friends watching the game together at home" loading="lazy" />
         <div class="card-body">
           <h3>At Home <span class="patent-chip">Patent-pending</span></h3>
-          <ul><li>Bluetooth-verified home watch parties</li><li>Prize drops and rewards during the game</li><li>Credit toward season-long milestones</li></ul>
+          <ul><li>Verified watch parties with prizes during the game</li></ul>
         </div>
       </div>
     </div>
@@ -504,6 +503,12 @@
       <h2>Four ownable sponsorships.<br>Every place fans gather.</h2>
       <p class="lead">Signage earns impressions. BlinkUp earns check-ins, redemptions, and tracked sales — new, sellable, <b>category-exclusive</b> inventory. One brand can own it all, or split it across partners.</p>
     </div>
+    <div class="sig-strip reveal" style="margin-top:0;margin-bottom:28px;">
+      <div class="sig"><div class="sig-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="9" r="6"/><path d="M9 14l-2 7 5-3 5 3-2-7"/></svg></div><h4>Fan of the Game</h4><p>Real-time prize draw — check in to enter.</p><div class="cat-tags" style="margin-top:10px;"><span class="cat-tag">Arena</span><span class="cat-tag">Bar</span><span class="cat-tag">Home</span></div></div>
+      <div class="sig"><div class="sig-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 11h12l-1 9H6z"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div><h4>Bar of the Game</h4><p>One lucky bar wins a sponsored round for every fan.</p><div class="cat-tags" style="margin-top:10px;"><span class="cat-tag">Bar</span></div></div>
+      <div class="sig"><div class="sig-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.2"/><path d="M15.5 14c3 .3 4.5 2 4.5 5"/></svg></div><h4>Group of the Game</h4><p>One party checks in together — every fan identified.</p><div class="cat-tags" style="margin-top:10px;"><span class="cat-tag">Arena</span><span class="cat-tag">Bar</span><span class="cat-tag">Home</span></div></div>
+      <div class="sig"><div class="sig-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div><h4>Stat-Trigger Deals</h4><p>A live game stat unlocks a sponsor deal.</p><div class="cat-tags" style="margin-top:10px;"><span class="cat-tag">Arena</span><span class="cat-tag">Bar</span><span class="cat-tag">Home</span></div></div>
+    </div>
     <div class="cards">
       <div class="card slate-card reveal">
         <div class="card-ic"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/></svg></div>
@@ -531,12 +536,6 @@
       <div class="slabel2">Season-Long · The Fourth Category</div>
       <h3>Official Sponsor of Season Milestones</h3>
       <p>Games attended, attendance streaks, and points that build all year — draft parties, fan fests, and community events included — all integrated into your loyalty program.</p>
-    </div>
-    <div class="sig-strip">
-      <div class="sig reveal"><div class="sig-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="9" r="6"/><path d="M9 14l-2 7 5-3 5 3-2-7"/></svg></div><h4>Fan of the Game</h4><p>Real-time prize draw — check in to enter.</p></div>
-      <div class="sig reveal"><div class="sig-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 11h12l-1 9H6z"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div><h4>Bar of the Game</h4><p>One lucky bar wins a sponsored round for every fan.</p></div>
-      <div class="sig reveal"><div class="sig-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.2"/><path d="M15.5 14c3 .3 4.5 2 4.5 5"/></svg></div><h4>Group of the Game</h4><p>One party checks in together — every fan identified.</p></div>
-      <div class="sig reveal"><div class="sig-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div><h4>Stat-Trigger Deals</h4><p>A live game stat unlocks a sponsor deal.</p></div>
     </div>
     <p class="slate-mini reveal">New inventory, ready to price — <span class="grad-text">across the arena, the bar, and the living room.</span></p>
   </div>
@@ -596,7 +595,21 @@
       <h2>Turn partners into <span class="serif-i" style="color:var(--glow-blue)">fan-driven</span> activations.</h2>
       <p class="lead">Sponsorships your partners can justify — with the numbers to renew.</p>
     </div>
-    <div style="max-width:620px;margin:0 auto;">
+    <div class="part-grid">
+      <div class="netmap reveal">
+        <svg class="lines" viewBox="0 0 400 400" preserveAspectRatio="none">
+          <line x1="200" y1="200" x2="90" y2="80" stroke="rgba(255,255,255,.25)" stroke-width="1.5" stroke-dasharray="4 5"/>
+          <line x1="200" y1="200" x2="320" y2="90" stroke="rgba(255,255,255,.25)" stroke-width="1.5" stroke-dasharray="4 5"/>
+          <line x1="200" y1="200" x2="80" y2="320" stroke="rgba(255,255,255,.25)" stroke-width="1.5" stroke-dasharray="4 5"/>
+          <line x1="200" y1="200" x2="330" y2="330" stroke="rgba(255,255,255,.25)" stroke-width="1.5" stroke-dasharray="4 5"/>
+        </svg>
+        <div class="center-glow"></div>
+        <div class="node arena" style="top:50%;left:50%"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/></svg></div><div class="name">Arena</div><div class="type">In-Arena</div></div>
+        <div class="node bar" style="top:20%;left:22%"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 11h12l-1 9H6z"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div><div class="name">Downtown</div><div class="type">Bar</div></div>
+        <div class="node home" style="top:22%;left:80%"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></div><div class="name">Suburbs</div><div class="type">House Party</div></div>
+        <div class="node home" style="top:80%;left:20%"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></div><div class="name">Uptown</div><div class="type">House Party</div></div>
+        <div class="node bar" style="top:82%;left:82%"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 11h12l-1 9H6z"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div><div class="name">Eastside</div><div class="type">Bar</div></div>
+      </div>
       <div class="recap reveal">
         <div class="rlabel">Example Sponsorship Recap</div>
         <div class="rsub">Per-game and season reporting the team shares with every partner.</div>
@@ -621,12 +634,12 @@
   <div class="wrap">
     <div class="sec-head center reveal">
       <h2>The questions every team asks.</h2>
-      <p class="lead">Straight answers, <span class="serif-i grad-text">before you even ask.</span></p>
+      <p class="lead">Honest answers, <span class="serif-i grad-text">up front.</span></p>
     </div>
     <div class="qa-list">
       <div class="qa reveal">
         <h4>Does this live in our app, under our brand?</h4>
-        <p>Yes. BlinkUp is an SDK inside <b>your</b> app — fans see your feature name and your sponsors, never ours. We set up locations, offers, and partners; you're <b>live in weeks</b>, with ongoing support and reporting.</p>
+        <p>Yes. BlinkUp drops into <b>your</b> app and website — fans see your feature name and your sponsors, never ours. We set up locations, offers, and partners; you're <b>live in weeks</b>, with ongoing support and reporting.</p>
       </div>
       <div class="qa reveal">
         <h4>We already run a loyalty program. Does this replace it?</h4>
@@ -658,7 +671,7 @@
     <div class="planner-grid">
       <div class="reveal">
         <div class="q-label">1. Where do you want fans showing up?</div>
-        <div class="q-hint">Pick all that apply — pro team, big program, or small school.</div>
+        <div class="q-hint">Pick all that apply.</div>
         <div class="plan-chips" id="qVenues">
           <button type="button" class="plan-chip sel" data-v="stadium"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l5 5L20 7"/></svg></span>In the stadium</button>
           <button type="button" class="plan-chip" data-v="bars"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l5 5L20 7"/></svg></span>At bars</button>
@@ -667,9 +680,9 @@
         </div>
         <div class="q-label">2. Are your sponsors asking for measurable results?</div>
         <div class="plan-chips" id="qSponsor">
-          <button type="button" class="plan-chip sel" data-s="yes"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l5 5L20 7"/></svg></span>Yes, constantly</button>
+          <button type="button" class="plan-chip sel" data-s="yes"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l5 5L20 7"/></svg></span>Yes</button>
           <button type="button" class="plan-chip" data-s="notyet"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l5 5L20 7"/></svg></span>Not yet</button>
-          <button type="button" class="plan-chip" data-s="unsure"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l5 5L20 7"/></svg></span>Honestly, not sure</button>
+          <button type="button" class="plan-chip" data-s="unsure"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l5 5L20 7"/></svg></span>Not sure</button>
         </div>
       </div>
       <div class="plan-card reveal" aria-live="polite">
@@ -696,8 +709,7 @@
       <div class="cta-step"><div class="num-badge">3</div><div><h4>Launch &amp; activate</h4><p>Live in your app in weeks — we handle the bar network and setup.</p></div></div>
     </div>
     <div class="reveal">
-      <a href="mailto:willbott@blinkupapp.com" class="btn btn-primary" style="margin-bottom:26px;">Book a Demo →</a>
-      <div><a href="mailto:willbott@blinkupapp.com" class="cta-mail">willbott@blinkupapp.com</a></div>
+      <a href="mailto:willbott@blinkupapp.com?subject=BlinkUp%20demo%20request" class="btn btn-primary">Book a Demo →</a>
     </div>
   </div>
 </section>
@@ -706,7 +718,7 @@
   <div class="wrap foot-inner">
     <img class="foot-logo" src="assets/blinkup-logo-white.png" alt="BlinkUp" />
     <div>© 2026 BlinkUp · blinkupapp.com · <a href="privacy-policy/" style="color:rgba(255,255,255,.6);text-decoration:none;">Privacy</a> · <a href="terms-of-use/" style="color:rgba(255,255,255,.6);text-decoration:none;">Terms</a></div>
-    <div><a href="mailto:willbott@blinkupapp.com" style="color:var(--glow-blue);text-decoration:none;">willbott@blinkupapp.com</a></div>
+    <div><a href="mailto:willbott@blinkupapp.com?subject=BlinkUp%20inquiry" style="color:var(--glow-blue);text-decoration:none;">Contact</a></div>
   </div>
 </footer>
 
