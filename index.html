@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>BlinkUp — Identify Every Fan. Reward Them Everywhere.</title>
-<meta name="description" content="BlinkUp turns your team app into a sponsorship activation platform across every place fans watch — in the arena, at the bar, and at home. Attendance-based fan loyalty for sports teams and their sponsors." />
+<meta name="description" content="BlinkUp turns your team app into a sponsorship activation platform across every place fans gather — in the arena, at the bar, and at home. Attendance-based fan loyalty for sports teams and their sponsors." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -299,6 +299,24 @@
   .slate-mini { text-align: center; margin-top: 40px; font-family: var(--sans); font-weight: 700; font-size: clamp(16px,2vw,20px); color: var(--ink); }
   .slate-mini .grad-text { font-weight: 800; }
 
+  /* Beyond game day — the fan calendar */
+  .cal-strip { display: grid; grid-template-columns: repeat(7,1fr); gap: 18px 10px; position: relative; margin-top: 54px; }
+  .cal-strip::before { content: ''; position: absolute; top: 27px; left: 6%; right: 6%; height: 2px;
+    background: linear-gradient(90deg, rgba(0,189,129,.55), rgba(25,154,160,.45), rgba(36,119,179,.55)); opacity: .5; }
+  .cal-item { text-align: center; position: relative; }
+  .cal-item .cal-ic { width: 54px; height: 54px; border-radius: 50%; margin: 0 auto 12px; display: grid; place-items: center;
+    background: rgba(255,255,255,.07); border: 1.5px solid rgba(255,255,255,.22); position: relative; }
+  .cal-item .cal-ic svg { width: 24px; height: 24px; stroke: rgba(255,255,255,.85); fill: none; stroke-width: 2; }
+  .cal-item.anchor .cal-ic { background: var(--grad); border-color: transparent; box-shadow: 0 0 0 7px rgba(42,165,149,.16), 0 10px 28px rgba(42,165,149,.4); }
+  .cal-item.anchor .cal-ic svg { stroke: #fff; }
+  .cal-item h4 { font-family: var(--sans); font-size: 15.5px; color: #fff; margin-bottom: 3px; }
+  .cal-item p { font-size: 12.5px; color: rgba(255,255,255,.6); line-height: 1.45; }
+  .cal-foot { margin-top: 50px; text-align: center; font-family: var(--sans); font-weight: 700; font-size: clamp(17px,2.2vw,22px); color: #fff; }
+  .cal-foot .g365 { background: linear-gradient(96deg,var(--glow-green),var(--glow-blue)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .cal-spine { margin-top: 10px; text-align: center; font-size: 13.5px; letter-spacing: 2px; text-transform: uppercase; font-family: var(--sans); font-weight: 700; color: var(--light-accent); }
+  @media (max-width: 940px) { .cal-strip { grid-template-columns: repeat(4,1fr); } .cal-strip::before { display: none; } }
+  @media (max-width: 560px) { .cal-strip { grid-template-columns: repeat(2,1fr); gap: 26px 12px; } }
+
   .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
   .reveal.in { opacity: 1; transform: none; }
 
@@ -344,7 +362,7 @@
     <div class="hero-copy">
       <div class="eyebrow light">Attendance-Based Fan Loyalty</div>
       <h1 id="heroH1">Identify <span class="cap" id="heroCap">every fan.<span class="tickbadge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 13l5 5L20 7"/></svg></span></span><br><span class="g">Reward them everywhere.</span></h1>
-      <p class="sub" style="margin-bottom:0;">BlinkUp turns your team app into a sponsorship activation platform across every place fans watch:</p>
+      <p class="sub" style="margin-bottom:0;">BlinkUp turns your team app into a sponsorship activation platform across every place fans gather:</p>
       <div class="place-chips" aria-hidden="false">
         <span class="place-chip" data-place="0"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l5 5L20 7"/></svg></span>in the arena</span>
         <span class="place-chip" data-place="1"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l5 5L20 7"/></svg></span>at the bar</span>
@@ -495,7 +513,7 @@
     <div class="sec-head reveal">
       <div class="eyebrow">The Sponsorship Slate</div>
       <h2>Four ownable sponsorships.<br>Every place fans gather.</h2>
-      <p class="lead">BlinkUp turns fan presence — at the arena, at the bar, and at home — into new, sellable, <b>category-exclusive</b> sponsorship inventory. One brand can own it all, or split it across partners.</p>
+      <p class="lead">BlinkUp turns fan presence — at the tailgate, the arena, the bar, and at home — into new, sellable, <b>category-exclusive</b> sponsorship inventory. One brand can own it all, or split it across partners.</p>
     </div>
     <div class="statbar reveal">
       <span>80+ games a season</span><span class="dot"></span>
@@ -508,7 +526,7 @@
         <div class="card-ic"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/></svg></div>
         <div class="slabel">In-Arena</div>
         <h3>Official Sponsor of Game Day Live</h3>
-        <p>Points, prize draws, and deals for fans inside the arena.</p>
+        <p>Points, prize draws, and deals for fans at the tailgate and inside the arena.</p>
         <div class="cat-tags"><span class="who">Ideal for</span><span class="cat-tag">Beverage</span><span class="cat-tag">Automotive</span><span class="cat-tag">QSR</span></div>
       </div>
       <div class="card slate-card reveal">
@@ -529,7 +547,7 @@
     <div class="slate-season reveal">
       <div class="slabel2">Season-Long · The Fourth Category</div>
       <h3>Official Sponsor of Season Milestones</h3>
-      <p>Games attended, attendance streaks, and season-long points — plus prize draws and partner deals, all integrated into your loyalty program.</p>
+      <p>Games attended, attendance streaks, and points that build all year — draft parties, fan fests, and community events included — all integrated into your loyalty program.</p>
     </div>
     <div class="sig-strip">
       <div class="sig reveal"><div class="sig-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="9" r="6"/><path d="M9 14l-2 7 5-3 5 3-2-7"/></svg></div><h4>Fan of the Game</h4><p>Real-time prize draw — check in to enter.</p></div>
@@ -538,6 +556,27 @@
       <div class="sig reveal"><div class="sig-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div><h4>Stat-Trigger Deals</h4><p>A live game stat unlocks a sponsor deal.</p></div>
     </div>
     <p class="slate-mini reveal">New inventory, ready to price — <span class="grad-text">across the arena, the bar, and the living room.</span></p>
+  </div>
+</section>
+
+<section class="sec sec-dark" id="beyond">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow light">Beyond Game Day</div>
+      <h2>Any moment fans show up<br>can be rewarded.</h2>
+      <p class="lead">Game day is the anchor — not the limit. Every gathering on the team calendar becomes verified, rewardable, sponsorable engagement.</p>
+    </div>
+    <div class="cal-strip reveal">
+      <div class="cal-item"><div class="cal-ic"><svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.8-4.5 4.2 1.1 6-5.4-3-5.4 3 1.1-6L3.2 9.4l6.1-.8z"/></svg></div><h4>Draft Party</h4><p>Offseason hype, checked in</p></div>
+      <div class="cal-item"><div class="cal-ic"><svg viewBox="0 0 24 24"><path d="M5 21V4"/><path d="M5 4h12l-2 4 2 4H5"/></svg></div><h4>Fan Fest</h4><p>Every festival fan identified</p></div>
+      <div class="cal-item"><div class="cal-ic"><svg viewBox="0 0 24 24"><path d="M12 3c2 3 5 4.5 5 8a5 5 0 01-10 0c0-3.5 3-5 5-8z"/></svg></div><h4>Tailgate</h4><p>Rewards before kickoff</p></div>
+      <div class="cal-item anchor"><div class="cal-ic"><svg viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/></svg></div><h4>Game Day</h4><p>Arena, bar &amp; home</p></div>
+      <div class="cal-item"><div class="cal-ic"><svg viewBox="0 0 24 24"><path d="M5 11h12l-1 9H6z"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div><h4>Watch Parties</h4><p>Away games count too</p></div>
+      <div class="cal-item"><div class="cal-ic"><svg viewBox="0 0 24 24"><path d="M12 21S4 14.5 4 9.5A4.5 4.5 0 0112 6a4.5 4.5 0 018 3.5C20 14.5 12 21 12 21z"/></svg></div><h4>Community</h4><p>5Ks, clinics &amp; charity days</p></div>
+      <div class="cal-item"><div class="cal-ic"><svg viewBox="0 0 24 24"><path d="M12 4l5 14H7z"/><path d="M5 18h14"/></svg></div><h4>Training Camp</h4><p>Open practice, rewarded</p></div>
+    </div>
+    <div class="cal-spine reveal">Attend → Identify → Reward</div>
+    <p class="cal-foot reveal">365 days of fan engagement — <span class="g365">presented by your sponsor.</span></p>
   </div>
 </section>
 
@@ -672,7 +711,7 @@
   <div class="wrap">
     <div class="eyebrow light reveal" style="text-align:center;">Next Steps</div>
     <h2 class="reveal">Let's launch it <span class="serif-i">together.</span></h2>
-    <p class="lead reveal">Identify every fan — in the arena, at the bar, and at home.</p>
+    <p class="lead reveal">Identify every fan — wherever they gather.</p>
     <div class="cta-steps reveal">
       <div class="cta-step"><div class="num-badge">1</div><div><h4>Schedule a demo</h4><p>See BlinkUp live and explore the right activations for your team.</p></div></div>
       <div class="cta-step"><div class="num-badge">2</div><div><h4>Package for sponsors</h4><p>We help shape concepts your partnerships team can sell.</p></div></div>
