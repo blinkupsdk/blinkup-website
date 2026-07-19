@@ -377,7 +377,7 @@
 .tabpanel .cat-tags { margin-bottom: 20px; }
 
 /* Why band (landing) */
-.why-grid { display: grid; grid-template-columns: .65fr 1.35fr; gap: 50px; align-items: center; }
+.why-grid { display: grid; grid-template-columns: 1.35fr .65fr; gap: 50px; align-items: center; }
 .why-grid .manifesto-line { font-family: var(--sans); font-weight: 600; font-size: clamp(18px,2.4vw,24px); line-height: 1.4; }
 .why-grid .manifesto-line b { font-weight: 800; }
 .why-kicker { margin-top: 14px; font-family: var(--sans); font-weight: 800; font-size: clamp(16px,2vw,20px);
@@ -437,3 +437,14 @@ details.qa p b { color: var(--text); }
 .place-chip, .place-chip:hover { text-decoration: none; }
 a.place-chip { cursor: pointer; }
 a.place-chip:hover { border-color: rgba(255,255,255,.7); color: #fff; }
+
+/* v12: hero chip venue icons + donut framing */
+.place-chip .picon { width: 16px; height: 16px; stroke: rgba(255,255,255,.75); fill: none; stroke-width: 2; transition: stroke .4s; }
+.place-chip.active .picon, a.place-chip:hover .picon { stroke: #fff; }
+.donut-cap { text-align: center; font-family: var(--sans); font-weight: 700; font-size: 12px; letter-spacing: 2.5px;
+  text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: 14px; }
+.donut-label .s { max-width: 120px; }
+.with-pill { width: fit-content; margin: 18px auto 0; font-family: var(--sans); font-size: 13.5px; color: #fff;
+  background: linear-gradient(96deg, rgba(0,189,129,.35), rgba(36,119,179,.35)); border: 1.5px solid rgba(70,214,180,.5);
+  border-radius: 999px; padding: 7px 16px; }
+.with-pill b { font-weight: 800; }
