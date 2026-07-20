@@ -463,3 +463,8 @@ a.place-chip:hover { border-color: rgba(255,255,255,.7); color: #fff; }
   border-radius: 20px; padding: 36px 28px; }
 .demo-thanks h3 { font-size: 24px; margin-bottom: 8px; }
 .demo-thanks p { color: rgba(255,255,255,.8); }
+
+/* v16: partner card with logo, single centered */
+#proof .partner-card { max-width: 620px; margin: 0 auto; text-align: center; align-items: center; }
+.partner-logo { width: 100%; max-width: 340px; height: auto; margin: 0 auto 18px; display: block; }
+#proof .brand-chips { justify-content: center; }
