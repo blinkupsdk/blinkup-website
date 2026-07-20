@@ -160,7 +160,12 @@
         <div id="planItems"></div>
         <div class="plan-always"><b>Included in every plan:</b> season milestones &amp; attendance streaks, and every participating fan identified — first-party data in your CRM.</div>
         <div class="plan-pitch" id="planPitch"></div>
-        <a class="btn btn-primary plan-cta" id="planCta" href="#demo">Book a demo — bring this plan →</a>
+        <form class="plan-email" id="planEmailForm">
+          <input type="email" id="planEmail" placeholder="Your work email" required aria-label="Work email" autocomplete="email" />
+          <button type="submit" class="btn btn-primary">Email me my game plan →</button>
+        </form>
+        <div class="plan-email-done" id="planEmailDone" style="display:none;"></div>
+        <a class="plan-demo-link" id="planCta" href="#demo">or book a demo with this plan →</a>
       </div>
     </div>
   </div>
@@ -278,6 +283,13 @@
     t.style.display = 'block';
     t.classList.add('in');
   }
+
+  // GA4 custom events — turn traffic into intent signals.
+  function track(name, params) { if (window.gtag) gtag('event', name, params || {}); }
+  document.querySelectorAll('a[href="#demo"]').forEach(a => a.addEventListener('click', () => track('demo_cta_click')));
+  document.querySelectorAll('a[href="#planner"]').forEach(a => a.addEventListener('click', () => track('planner_cta_click')));
+  const demoFormEl = document.getElementById('demoForm');
+  if (demoFormEl) demoFormEl.addEventListener('submit', () => track('demo_submitted'));
 
   const nav = document.getElementById('nav');
   const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
@@ -436,6 +448,32 @@
     cta.addEventListener('click', () => {
       const msg = document.getElementById('dfMsg');
       if (msg && state.summary) msg.value = state.summary;
+      if (window.gtag) gtag('event', 'planner_book_demo', { org: state.org });
+    });
+
+    // "Email me my game plan" — captures the lead + their built plan.
+    const emailForm = document.getElementById('planEmailForm');
+    emailForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('planEmail').value;
+      const btn = emailForm.querySelector('button');
+      const done = document.getElementById('planEmailDone');
+      btn.disabled = true; btn.textContent = 'Sending…';
+      if (window.gtag) gtag('event', 'plan_emailed', { org: state.org });
+      try {
+        await fetch('https://formsubmit.co/ajax/willbott@blinkupapp.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            _subject: 'BlinkUp game plan request',
+            email: email,
+            game_plan: state.summary || '(no selections)'
+          })
+        });
+      } catch (err) { /* still confirm — submission is queued */ }
+      emailForm.style.display = 'none';
+      done.textContent = "Got it — we'll send your game plan and follow up shortly.";
+      done.style.display = 'block';
     });
     document.querySelectorAll('#qOrg .plan-chip').forEach(b => b.addEventListener('click', () => {
       state.org = b.dataset.o;

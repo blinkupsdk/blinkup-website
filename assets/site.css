@@ -468,3 +468,15 @@ a.place-chip:hover { border-color: rgba(255,255,255,.7); color: #fff; }
 #proof .partner-card { max-width: 620px; margin: 0 auto; text-align: center; align-items: center; }
 .partner-logo { width: 100%; max-width: 340px; height: auto; margin: 0 auto 18px; display: block; }
 #proof .brand-chips { justify-content: center; }
+
+/* v18: plan email capture */
+.plan-email { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
+.plan-email input { flex: 1; min-width: 180px; padding: 12px 14px; border: 1.5px solid rgba(0,0,0,.15);
+  border-radius: 10px; font-family: var(--body); font-size: 15px; color: var(--text); }
+.plan-email input:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(25,154,160,.15); }
+.plan-email button { white-space: nowrap; }
+.plan-email-done { margin-top: 20px; font-family: var(--sans); font-weight: 600; color: var(--green-deep);
+  background: rgba(0,189,129,.08); border-radius: 12px; padding: 15px 16px; }
+.plan-demo-link { display: inline-block; margin-top: 14px; font-family: var(--sans); font-weight: 600;
+  font-size: 14px; color: var(--blue); text-decoration: none; }
+.plan-demo-link:hover { text-decoration: underline; }
